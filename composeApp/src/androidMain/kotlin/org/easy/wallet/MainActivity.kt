@@ -3,21 +3,16 @@ package org.easy.wallet
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import org.easy.wallet.ui.EasyWalletApp
+import org.easy.wallet.ui.rememberAppState
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
 
-        setContent {
-            App()
-        }
+    setContent {
+      val appState = rememberAppState()
+      EasyWalletApp(appState)
     }
-}
-
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    App()
+  }
 }

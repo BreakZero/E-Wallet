@@ -1,5 +1,5 @@
 <resources>
-    <string name="tab_explore">Explore</string>
-    <string name="tab_reading">Reading</string>
+    <string name="tab_news">News</string>
+    <string name="tab_dapp">dApp</string>
     <string name="tab_account">Account</string>
 </resources>

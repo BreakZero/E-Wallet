@@ -1,4 +1,4 @@
-package org.easy.wallet.feature.news
+package org.easy.wallet.feature.apps
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

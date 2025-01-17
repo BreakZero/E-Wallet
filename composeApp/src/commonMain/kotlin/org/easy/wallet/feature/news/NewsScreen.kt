@@ -1,4 +1,4 @@
-package ai.askquin.feature.reading
+package org.easy.wallet.feature.news
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,18 +11,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun ReadingScreen() {
-  ReadingTabScreen()
+fun NewsScreen() {
+  NewsTabScreen()
 }
 
 @Composable
-private fun ReadingTabScreen() {
+private fun NewsTabScreen() {
   Scaffold(modifier = Modifier.fillMaxSize(), containerColor = Color.Red) {
     Box(
       modifier = Modifier.fillMaxSize().padding(it),
       contentAlignment = Alignment.Center
     ) {
-      Text("Reading")
+      Text("News")
     }
   }
 }

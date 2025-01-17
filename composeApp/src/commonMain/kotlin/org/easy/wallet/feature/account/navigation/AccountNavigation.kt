@@ -1,4 +1,4 @@
-package ai.askquin.feature.account.navigation
+package org.easy.wallet.feature.account.navigation
 
 import ai.askquin.feature.account.AccountScreen
 import androidx.navigation.NavController

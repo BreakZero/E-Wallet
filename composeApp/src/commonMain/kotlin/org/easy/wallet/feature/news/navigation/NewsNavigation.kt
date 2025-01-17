@@ -1,6 +1,6 @@
 package ai.askquin.feature.reading.navigation
 
-import ai.askquin.feature.reading.ReadingScreen
+import org.easy.wallet.feature.news.NewsScreen
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -19,7 +19,7 @@ fun NavController.navigateToReading(navOptions: NavOptions) = navigate(route = R
 fun NavGraphBuilder.readingSection(readingDestination: NavGraphBuilder.() -> Unit,) {
   navigation<ReadingBaseRoute>(startDestination = ReadingRoute) {
     composable<ReadingRoute> {
-      ReadingScreen()
+      NewsScreen()
     }
     readingDestination()
   }
