@@ -1,25 +1,19 @@
 [versions]
-kotlin = "2.0.20"
-android-gradle-plugin = "8.4.2"
-androidTools = "31.6.0"
+kotlin = "2.1.0"
+androidGradlePlugin = "8.8.0"
+androidTools = "31.8.0"
+
+easy-version = "1.0.0"
 
 [libraries]
 # Dependencies of the included build-logic
-android-tools-build = { group = "com.android.tools.build", name = "gradle", version.ref = "android-gradle-plugin" }
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
-kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-compose-gradle-plugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
-
+compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
-android-application = { id = "easy.android.application" }
-android-application-compose = { id = "easy.android.application.compose" }
-android-library = { id = "easy.android.library" }
-android-library-compose = { id = "easy.android.library.compose" }
-android-test = { id = "easy.android.test" }
-android-hilt = { id = "easy.android.hilt"}
-android-jacoco = { id = "easy.android.jacoco" }
-android-koin = { id = "easy.android.koin" }
-android-lint = { id = "easy.android.lint" }
-library-jvm = { id = "easy.library.jvm" }
-library-multiplatform = { id = "easy.library.multiplatform" }
+androidApplication = { id = "easy.android.application", version.ref = "easy-version" }
+composeMultiplatform = { id = "easy.compose.multiplatform", version.ref = "easy-version" }
+androidLibrary = { id = "easy.android.library", version.ref = "easy-version" }
+android-koin = { id = "easy.android.koin", version.ref = "easy-version" }
