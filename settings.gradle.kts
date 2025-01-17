@@ -30,3 +30,7 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
+include(":platform:model")
+include(":platform:network")
+include(":platform:datastore")
+include(":platform:data")
