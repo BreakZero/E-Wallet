@@ -1,6 +1,5 @@
 package org.easy.wallet.feature.apps.navigation
 
-import org.easy.wallet.feature.news.NewsScreen
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions

@@ -5,7 +5,7 @@ import org.easy.wallet.di.initKoin
 import org.easy.wallet.ui.EasyWalletApp
 import org.easy.wallet.ui.rememberAppState
 
-fun MainViewController() = ComposeUIViewController(
+fun mainViewController() = ComposeUIViewController(
   configure = {
     initKoin()
   }

@@ -1,10 +1,9 @@
 package org.easy.wallet.datastore.di
 
-import org.koin.core.module.Module
-
 import kotlinx.cinterop.ExperimentalForeignApi
 import org.easy.wallet.datastore.DATA_STORE_FILE_NAME
 import org.easy.wallet.datastore.createDataStore
+import org.koin.core.module.Module
 import org.koin.dsl.module
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager

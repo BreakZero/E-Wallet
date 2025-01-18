@@ -19,8 +19,8 @@ fun WalletNavHost(
     navController = navController,
     startDestination = startDestination
   ) {
-    newsSection {  }
-    appsSection {  }
-    accountSection {  }
+    newsSection { }
+    appsSection { }
+    accountSection { }
   }
 }
