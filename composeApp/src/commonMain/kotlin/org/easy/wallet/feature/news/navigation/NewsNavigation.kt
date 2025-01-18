@@ -1,4 +1,4 @@
-package ai.askquin.feature.reading.navigation
+package org.easy.wallet.feature.news.navigation
 
 import org.easy.wallet.feature.news.NewsScreen
 import androidx.navigation.NavController
@@ -9,16 +9,16 @@ import androidx.navigation.navigation
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object ReadingBaseRoute
+data object NewsBaseRoute
 
 @Serializable
-data object ReadingRoute
+data object NewsRoute
 
-fun NavController.navigateToReading(navOptions: NavOptions) = navigate(route = ReadingRoute, navOptions)
+fun NavController.navigateToNews(navOptions: NavOptions) = navigate(route = NewsRoute, navOptions)
 
-fun NavGraphBuilder.readingSection(readingDestination: NavGraphBuilder.() -> Unit,) {
-  navigation<ReadingBaseRoute>(startDestination = ReadingRoute) {
-    composable<ReadingRoute> {
+fun NavGraphBuilder.newsSection(readingDestination: NavGraphBuilder.() -> Unit,) {
+  navigation<NewsBaseRoute>(startDestination = NewsRoute) {
+    composable<NewsRoute> {
       NewsScreen()
     }
     readingDestination()

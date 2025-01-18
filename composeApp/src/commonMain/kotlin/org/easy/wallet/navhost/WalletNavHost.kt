@@ -4,6 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import org.easy.wallet.feature.account.navigation.accountSection
+import org.easy.wallet.feature.apps.navigation.appsSection
+import org.easy.wallet.feature.news.navigation.newsSection
 
 @Composable
 fun WalletNavHost(
@@ -16,6 +19,8 @@ fun WalletNavHost(
     navController = navController,
     startDestination = startDestination
   ) {
-
+    newsSection {  }
+    appsSection {  }
+    accountSection {  }
   }
 }

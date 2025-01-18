@@ -1,6 +1,6 @@
 package org.easy.wallet.feature.account.navigation
 
-import ai.askquin.feature.account.AccountScreen
+import org.easy.wallet.feature.account.AccountScreen
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions

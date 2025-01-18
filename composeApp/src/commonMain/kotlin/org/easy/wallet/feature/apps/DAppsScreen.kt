@@ -11,12 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun NewsScreen() {
-  NewsTabScreen()
+fun DAppsScreen() {
+  DAppsTabScreen()
 }
 
 @Composable
-private fun NewsTabScreen() {
+private fun DAppsTabScreen() {
   Scaffold(modifier = Modifier.fillMaxSize(), containerColor = Color.Red) {
     Box(
       modifier = Modifier.fillMaxSize().padding(it),
