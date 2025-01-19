@@ -1,30 +1,42 @@
 package org.easy.wallet.feature.news
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import app.cash.paging.compose.LazyPagingItems
+import app.cash.paging.compose.collectAsLazyPagingItems
+import org.easy.wallet.components.PullToRefreshPagingColumn
+import org.easy.wallet.model.News
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun NewsScreen() {
   val viewModel: NewsViewModel = koinViewModel()
-  NewsTabScreen()
+  val news = viewModel.newsPagingData.collectAsLazyPagingItems()
+  NewsTabScreen(news)
 }
 
 @Composable
-private fun NewsTabScreen() {
+private fun NewsTabScreen(newsPagingItems: LazyPagingItems<News>) {
   Scaffold(modifier = Modifier.fillMaxSize(), containerColor = Color.Red) {
-    Box(
-      modifier = Modifier.fillMaxSize().padding(it),
-      contentAlignment = Alignment.Center
-    ) {
-      Text("News")
-    }
+    PullToRefreshPagingColumn(
+      modifier = Modifier
+        .fillMaxSize()
+        .padding(it),
+      pagingItems = newsPagingItems,
+      verticalArrangement = Arrangement.spacedBy(12.dp),
+      itemKey = { index -> newsPagingItems[index]!!.id },
+      itemContainer = { news ->
+        Text("New: $news", modifier = Modifier.fillMaxWidth().height(50.dp))
+      }
+    )
   }
 }

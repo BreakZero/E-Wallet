@@ -6,7 +6,9 @@ import org.easy.wallet.network.model.dto.BlockChairBaseResponse
 import org.easy.wallet.network.model.dto.BlockChairNewDto
 import org.easy.wallet.network.safeGet
 
-class BlockChairController internal constructor(private val httpClient: HttpClient) {
+class BlockChairController internal constructor(
+  private val httpClient: HttpClient
+) {
   suspend fun getNews(limit: Int, offset: Int): List<BlockChairNewDto> {
     val result =
       httpClient.safeGet<BlockChairBaseResponse<List<BlockChairNewDto>>>(urlString = "news?q=language(en)") {
