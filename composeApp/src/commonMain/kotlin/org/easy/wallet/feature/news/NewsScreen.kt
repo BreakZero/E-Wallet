@@ -3,10 +3,8 @@ package org.easy.wallet.feature.news
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,9 +31,9 @@ private fun NewsTabScreen(newsPagingItems: LazyPagingItems<News>) {
         .padding(it),
       pagingItems = newsPagingItems,
       verticalArrangement = Arrangement.spacedBy(12.dp),
-      itemKey = { index -> newsPagingItems[index]!!.id },
+      itemKey = { index -> newsPagingItems[index]!!.hash },
       itemContainer = { news ->
-        Text("New: $news", modifier = Modifier.fillMaxWidth().height(50.dp))
+        NewsItemView(modifier = Modifier.fillMaxWidth(), news = news, itemClick = {})
       }
     )
   }
