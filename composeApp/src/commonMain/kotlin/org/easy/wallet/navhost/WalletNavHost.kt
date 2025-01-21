@@ -7,6 +7,8 @@ import androidx.navigation.compose.NavHost
 import org.easy.wallet.feature.account.navigation.accountSection
 import org.easy.wallet.feature.apps.navigation.appsSection
 import org.easy.wallet.feature.news.navigation.newsSection
+import org.easy.wallet.feature.wallet.navigation.WalletOptionRoute
+import org.easy.wallet.feature.wallet.navigation.attachWalletRoutes
 
 @Composable
 fun WalletNavHost(
@@ -21,6 +23,15 @@ fun WalletNavHost(
   ) {
     newsSection { }
     appsSection { }
-    accountSection { }
+    accountSection(
+      onEvent = {
+        navController.navigate(WalletOptionRoute)
+      },
+      accountDestination = {
+        attachWalletRoutes(
+          popBackStack = navController::popBackStack
+        )
+      }
+    )
   }
 }

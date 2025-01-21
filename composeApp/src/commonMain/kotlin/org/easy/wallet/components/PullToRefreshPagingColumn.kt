@@ -2,6 +2,7 @@ package org.easy.wallet.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
@@ -28,6 +29,7 @@ import app.cash.paging.compose.LazyPagingItems
 @Composable
 fun <T : Any> PullToRefreshPagingColumn(
   modifier: Modifier = Modifier,
+  contentPadding: PaddingValues = PaddingValues(0.dp),
   lazyListState: LazyListState = rememberLazyListState(),
   pagingItems: LazyPagingItems<T>,
   headerContainer: LazyListScope.() -> Unit = {},
@@ -52,6 +54,7 @@ fun <T : Any> PullToRefreshPagingColumn(
     LazyColumn(
       modifier = Modifier.fillMaxSize(),
       state = lazyListState,
+      contentPadding = contentPadding,
       verticalArrangement = verticalArrangement
     ) {
       headerContainer()

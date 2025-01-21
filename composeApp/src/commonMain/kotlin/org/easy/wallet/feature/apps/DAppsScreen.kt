@@ -17,7 +17,7 @@ fun DAppsScreen() {
 
 @Composable
 private fun DAppsTabScreen() {
-  Scaffold(modifier = Modifier.fillMaxSize(), containerColor = Color.Red) {
+  Scaffold(modifier = Modifier.fillMaxSize()) {
     Box(
       modifier = Modifier.fillMaxSize().padding(it),
       contentAlignment = Alignment.Center
