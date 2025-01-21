@@ -14,12 +14,16 @@ data object AccountBaseRoute
 @Serializable
 data object AccountRoute
 
-fun NavController.navigateToAccount(navOptions: NavOptions) = navigate(route = AccountRoute, navOptions)
+fun NavController.navigateToAccount(navOptions: NavOptions) =
+  navigate(route = AccountRoute, navOptions)
 
-fun NavGraphBuilder.accountSection(accountDestination: NavGraphBuilder.() -> Unit,) {
+fun NavGraphBuilder.accountSection(
+  accountDestination: NavGraphBuilder.() -> Unit,
+  onEvent: () -> Unit
+) {
   navigation<AccountBaseRoute>(startDestination = AccountRoute) {
     composable<AccountRoute> {
-      AccountScreen()
+      AccountScreen(navigateToWallet = onEvent)
     }
     accountDestination()
   }
