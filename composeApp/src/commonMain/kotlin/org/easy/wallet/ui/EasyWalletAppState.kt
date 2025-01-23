@@ -52,9 +52,6 @@ class EasyAppState(
       }
     }
 
-  var showBottomBar: Boolean = true
-    private set
-
   val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.entries
 
   fun navigateToTopLevelDestination(topLevelDestination: TopLevelDestination) {

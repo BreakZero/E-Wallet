@@ -18,28 +18,29 @@ import easywallet.composeapp.generated.resources.tab_account
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun AccountScreen(
-  navigateToWallet: () -> Unit
-) {
+fun AccountScreen(navigateToWallet: () -> Unit) {
   AccountTabScreen(onEvent = navigateToWallet)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun AccountTabScreen(
-  onEvent: () -> Unit
-) {
-  Scaffold(modifier = Modifier.fillMaxSize(),
+private fun AccountTabScreen(onEvent: () -> Unit) {
+  Scaffold(
+    modifier = Modifier.fillMaxSize(),
     topBar = {
-      TopAppBar(title = {
-        Text(stringResource(Res.string.tab_account), style = MaterialTheme.typography.titleLarge)
-      })
-    }) {
+      TopAppBar(
+        title = {
+          Text(stringResource(Res.string.tab_account), style = MaterialTheme.typography.titleLarge)
+        }
+      )
+    }
+  ) {
     Column(
       modifier = Modifier.fillMaxSize().padding(it)
     ) {
       ListItem(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+          .fillMaxWidth()
           .clickable(onClick = onEvent),
         headlineContent = {
           Text("Wallet Manager")

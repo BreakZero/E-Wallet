@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import okio.Path.Companion.toPath
@@ -13,13 +14,23 @@ internal const val DATA_STORE_FILE_NAME = "wallet.preferences_pb"
 class WalletDataStore internal constructor(
   private val dataStore: DataStore<Preferences>
 ) {
-  fun <T> flowOf(key: Preferences.Key<T>, default: T): Flow<T> = dataStore.data.map { it[key] ?: default }
+  fun activeWallet(walletName: String): Flow<String> {
+    return dataStore.data.map { it[stringPreferencesKey(walletName)] ?: throw NoSuchElementException("Wallet $walletName not found!") }
+  }
 
-  suspend fun <T> update(key: Preferences.Key<T>, value: T) {
-    dataStore.edit { it[key] = value }
+  suspend fun addWallet(walletName: String, value: String) {
+    dataStore.edit {
+      val updateWalletNames =
+        it[PreferencesKeys.WALLET_NAME_KEY]?.toMutableSet()?.apply { add(walletName) } ?: setOf(
+          walletName
+        )
+      it[PreferencesKeys.WALLET_NAME_KEY] = updateWalletNames
+      it[stringPreferencesKey(walletName)] = value
+    }
   }
 }
 
-internal fun createDataStore(producePath: () -> String): DataStore<Preferences> = PreferenceDataStoreFactory.createWithPath(
-  produceFile = { producePath().toPath() }
-)
+internal fun createDataStore(producePath: () -> String): DataStore<Preferences> =
+  PreferenceDataStoreFactory.createWithPath(
+    produceFile = { producePath().toPath() }
+  )

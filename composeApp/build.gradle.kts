@@ -1,12 +1,29 @@
 import org.easy.configs.configureFlavors
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
 plugins {
   id("easy.multiplatform.application")
-  kotlin("plugin.serialization") version "2.1.0"
+  kotlin("plugin.serialization") version libs.versions.kotlin
+  alias(libs.plugins.kotlinCocoapods)
 }
 
 kotlin {
+  cocoapods {
+    version = "1.0.0"
+    summary = "Shared module description"
+    homepage = "https://example.com"
+    ios.deploymentTarget = "16.0"
+
+    framework {
+      baseName = "composeApp"
+    }
+    xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
+    xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
+    dependencies {
+      pod("TrustWalletCore", moduleName = "WalletCore")
+    }
+  }
   androidTarget {
     compilerOptions {
       jvmTarget.set(JvmTarget.JVM_17)
@@ -20,6 +37,8 @@ kotlin {
       implementation(libs.androidx.activity.ktx)
       implementation(libs.koin.android)
       implementation(libs.koin.androidx.compose)
+
+      implementation(libs.vico.compose.m3)
     }
     commonMain.dependencies {
       implementation(projects.platform.data)
@@ -37,6 +56,8 @@ kotlin {
       implementation(libs.navigation.compose)
 
       implementation(libs.kotlinx.serialization.json)
+
+      implementation(libs.kotlinx.coroutines.core)
 
       implementation(libs.koin.core)
       implementation(libs.koin.compose)
@@ -59,5 +80,6 @@ android {
 }
 
 dependencies {
+  implementation(libs.androidx.foundation.android)
   debugImplementation(compose.uiTooling)
 }
