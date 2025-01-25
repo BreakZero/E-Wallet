@@ -49,7 +49,6 @@ captures/
 locals/*
 iosApp/Pods/*
 iosApp/iosApp.xcworkspace/*
-iosApp/iosApp.xcodeproj/*
 
 # keystore files
 /keystore/*
