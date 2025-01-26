@@ -18,6 +18,10 @@ class WalletDataStore internal constructor(
     return dataStore.data.map { it[stringPreferencesKey(walletName)] ?: throw NoSuchElementException("Wallet $walletName not found!") }
   }
 
+  fun getWalletName(): Flow<String?> {
+    return dataStore.data.map { it[PreferencesKeys.WALLET_NAME_KEY]?.toMutableSet()?.firstOrNull()  }
+  }
+
   suspend fun addWallet(walletName: String, value: String) {
     dataStore.edit {
       val updateWalletNames =

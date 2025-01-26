@@ -3,6 +3,7 @@ package org.easy.wallet.data.repository
 import co.touchlab.kermit.Logger
 import com.trustwallet.core.HDWallet
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import org.easy.wallet.datastore.WalletDataStore
 
 class WalletRepositoryImpl internal constructor(
@@ -18,7 +19,11 @@ class WalletRepositoryImpl internal constructor(
     walletDataStore.addWallet(name, value)
   }
 
-  override fun activeWallet(walletName: String): Flow<String> {
-    return walletDataStore.activeWallet(walletName)
+  override fun walletName(): Flow<String?> {
+    return walletDataStore.getWalletName()
+  }
+
+  override fun activeWallet(walletName: String?): Flow<String?> {
+    return walletDataStore.activeWallet(walletName.orEmpty()).catch { emit("") }
   }
 }
