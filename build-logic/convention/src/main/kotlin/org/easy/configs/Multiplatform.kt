@@ -20,7 +20,7 @@ internal fun Project.configureMultiplatformLibrary() {
       iosSimulatorArm64()
     ).forEach { iosTarget ->
       iosTarget.binaries.framework {
-        baseName = "ComposeApp"
+        baseName = "composeApp"
         isStatic = true
       }
     }
@@ -41,7 +41,7 @@ internal fun Project.configureMultiplatformAndroid() {
       iosSimulatorArm64()
     ).forEach { iosTarget ->
       iosTarget.binaries.framework {
-        baseName = "ComposeApp"
+        baseName = "composeApp"
         isStatic = true
       }
     }

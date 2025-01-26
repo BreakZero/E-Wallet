@@ -57,7 +57,7 @@ fun EasyWalletApp(appState: EasyAppState) {
 
     AnimatedVisibility(
       modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter),
-      visible = appState.showBottomBar,
+      visible = appState.currentTopLevelDestination != null,
       enter = slideInVertically { it },
       exit = slideOutVertically { it }
     ) {

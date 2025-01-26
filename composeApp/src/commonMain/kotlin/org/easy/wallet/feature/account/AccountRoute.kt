@@ -12,39 +12,69 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import easywallet.composeapp.generated.resources.Res
 import easywallet.composeapp.generated.resources.tab_account
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun AccountScreen(
-  navigateToWallet: () -> Unit
-) {
-  AccountTabScreen(onEvent = navigateToWallet)
+fun AccountScreen(navigateToWallet: () -> Unit) {
+  val viewModel: AccountViewModel = koinViewModel()
+  val uiState by viewModel.state.collectAsStateWithLifecycle()
+
+  AccountTabScreen(uiState = uiState, onEvent = navigateToWallet)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AccountTabScreen(
+  uiState: AccountUiState,
   onEvent: () -> Unit
 ) {
-  Scaffold(modifier = Modifier.fillMaxSize(),
+  Scaffold(
+    modifier = Modifier.fillMaxSize(),
     topBar = {
-      TopAppBar(title = {
-        Text(stringResource(Res.string.tab_account), style = MaterialTheme.typography.titleLarge)
-      })
-    }) {
+      TopAppBar(
+        title = {
+          Text(stringResource(Res.string.tab_account), style = MaterialTheme.typography.titleLarge)
+        }
+      )
+    }
+  ) {
     Column(
       modifier = Modifier.fillMaxSize().padding(it)
     ) {
-      ListItem(
-        modifier = Modifier.fillMaxWidth()
-          .clickable(onClick = onEvent),
-        headlineContent = {
-          Text("Wallet Manager")
+      when (uiState) {
+        is AccountUiState.Info -> {
+          ListItem(
+            modifier = Modifier
+              .fillMaxWidth(),
+            headlineContent = {
+              Text("Wallet")
+            },
+            trailingContent = {
+              Text(uiState.walletName.orEmpty())
+            }
+          )
         }
-      )
+
+        AccountUiState.NoSetup -> {
+          ListItem(
+            modifier = Modifier
+              .fillMaxWidth()
+              .clickable(onClick = onEvent),
+            headlineContent = {
+              if (uiState is AccountUiState.NoSetup) {
+                Text("Create Wallet")
+              }
+            }
+          )
+        }
+      }
+
     }
   }
 }

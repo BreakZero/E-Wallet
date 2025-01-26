@@ -28,7 +28,7 @@ internal fun LazyItemScope.NewsItemView(
   itemClick: (News) -> Unit
 ) {
   val tags = remember {
-    news.tags.split(",").take(3)
+    news.tags.split(",").filter { it.isNotBlank() }
   }
   Card(
     modifier = modifier.animateItem(),

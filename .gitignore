@@ -47,8 +47,8 @@ _sandbox
 captures/
 
 locals/*
-Wallet-iOS/Pods/*
-Wallet-iOS/Wallet-iOS.xcworkspace/*
+iosApp/Pods/*
+iosApp/iosApp.xcworkspace/*
 
 # keystore files
 /keystore/*
