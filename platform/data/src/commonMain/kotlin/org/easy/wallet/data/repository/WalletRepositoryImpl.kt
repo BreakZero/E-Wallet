@@ -4,6 +4,7 @@ import co.touchlab.kermit.Logger
 import com.trustwallet.core.HDWallet
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flatMapLatest
 import org.easy.wallet.datastore.WalletDataStore
 
 class WalletRepositoryImpl internal constructor(
@@ -23,7 +24,9 @@ class WalletRepositoryImpl internal constructor(
     return walletDataStore.getWalletName()
   }
 
-  override fun activeWallet(walletName: String?): Flow<String?> {
-    return walletDataStore.activeWallet(walletName.orEmpty()).catch { emit("") }
+  override fun activeWallet(walletName1: String?): Flow<String?> {
+    return walletDataStore.getWalletName().flatMapLatest { walletName ->
+      walletDataStore.activeWallet(walletName.orEmpty()).catch { emit("") }
+    }
   }
 }
