@@ -5,11 +5,12 @@ import com.trustwallet.core.HDWallet
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import org.easy.wallet.datastore.WalletDataStore
 
 class WalletRepositoryImpl internal constructor(
   private val walletDataStore: WalletDataStore
-): WalletRepository {
+) : WalletRepository {
   override fun generateMnemonic(): String {
     val hdWallet = HDWallet(128, "")
     return hdWallet.mnemonic
@@ -20,13 +21,14 @@ class WalletRepositoryImpl internal constructor(
     walletDataStore.addWallet(name, value)
   }
 
-  override fun walletName(): Flow<String?> {
-    return walletDataStore.getWalletName()
+  override fun hasActivatedWallet(): Flow<Boolean> {
+    return walletDataStore.getWalletName().flatMapLatest { walletName ->
+      walletDataStore.activeWallet(walletName.orEmpty()).map { !it.isNullOrBlank() }
+        .catch { emit(false) }
+    }
   }
 
-  override fun activeWallet(walletName1: String?): Flow<String?> {
-    return walletDataStore.getWalletName().flatMapLatest { walletName ->
-      walletDataStore.activeWallet(walletName.orEmpty()).catch { emit("") }
-    }
+  override fun walletName(): Flow<String?> {
+    return walletDataStore.getWalletName()
   }
 }

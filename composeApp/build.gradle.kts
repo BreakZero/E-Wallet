@@ -46,6 +46,9 @@ kotlin {
 
       implementation(libs.haze)
 
+      implementation(libs.coil.compose)
+//      implementation(libs.coil.network.okhttp)
+
       implementation(compose.runtime)
       implementation(compose.material3)
       implementation(compose.ui)
