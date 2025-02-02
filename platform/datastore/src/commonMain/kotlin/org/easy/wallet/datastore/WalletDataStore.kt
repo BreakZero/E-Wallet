@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import okio.Path.Companion.toPath
 
@@ -15,11 +16,22 @@ class WalletDataStore internal constructor(
   private val dataStore: DataStore<Preferences>
 ) {
   fun activeWallet(walletName: String): Flow<String> {
-    return dataStore.data.map { it[stringPreferencesKey(walletName)] ?: throw NoSuchElementException("Wallet $walletName not found!") }
+    return dataStore.data.map {
+      it[stringPreferencesKey(walletName)]
+        ?: throw NoSuchElementException("Wallet $walletName not found!")
+    }
   }
 
   fun getWalletName(): Flow<String?> {
-    return dataStore.data.map { it[PreferencesKeys.WALLET_NAME_KEY]?.toMutableSet()?.firstOrNull()  }
+    return dataStore.data.map { it[PreferencesKeys.WALLET_NAME_KEY]?.toMutableSet()?.firstOrNull() }
+  }
+
+  fun walletMnemonic(): Flow<String?> {
+    return getWalletName().flatMapLatest { walletName ->
+      dataStore.data.map {
+        it[stringPreferencesKey(walletName.orEmpty())]
+      }
+    }
   }
 
   suspend fun addWallet(walletName: String, value: String) {

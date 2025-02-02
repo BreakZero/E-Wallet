@@ -7,6 +7,8 @@ interface WalletRepository {
 
   suspend fun saveWallet(name: String, value: String)
 
+  fun hasActivatedWallet(): Flow<Boolean>
+
   fun walletName(): Flow<String?>
-  fun activeWallet(walletName: String?): Flow<String?>
+  fun walletMnemonic(): Flow<String?>
 }
