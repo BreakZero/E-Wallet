@@ -31,4 +31,8 @@ class WalletRepositoryImpl internal constructor(
   override fun walletName(): Flow<String?> {
     return walletDataStore.getWalletName()
   }
+
+  override fun walletMnemonic(): Flow<String?> {
+    return walletDataStore.walletMnemonic()
+  }
 }

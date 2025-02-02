@@ -3,7 +3,6 @@ package org.easy.wallet.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -14,12 +13,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import org.easy.wallet.model.Assets
 import org.easy.wallet.model.Balance
 
 @Composable
 fun AssetsItemView(
-  assets: Assets,
+  assets: Balance,
   modifier: Modifier = Modifier,
   onItemClick: () -> Unit
 ) {
@@ -45,9 +43,8 @@ fun AssetsItemView(
       style = MaterialTheme.typography.titleMedium
     )
     Spacer(modifier = Modifier.weight(1.0f))
-    val balance = if (assets is Balance) assets.balance else 0.0
     Text(
-      text = "$balance ${assets.symbol}",
+      text = "${assets.balance} ${assets.symbol}",
       style = MaterialTheme.typography.titleLarge
     )
   }

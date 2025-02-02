@@ -33,7 +33,9 @@ private fun AssetsScreen(state: AssetsUiState) {
   Scaffold(modifier = Modifier.fillMaxSize()) {
     when (state) {
       AssetsUiState.Fetching -> {
-        OverlayLoadingWheel(contentDesc = "")
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+          OverlayLoadingWheel(contentDesc = "")
+        }
       }
 
       is AssetsUiState.WalletAssets -> {

@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -29,9 +30,9 @@ fun DynamicAsyncImage(
   imageUrl: String?,
   contentDescription: String?,
   modifier: Modifier = Modifier,
-  placeholder: Painter = painterResource(Res.drawable.compose_multiplatform)
+  placeholder: Painter = painterResource(Res.drawable.compose_multiplatform),
+  tint: Color? = null
 ) {
-  val iconTint = MaterialTheme.colorScheme.primary
   var isLoading by remember { mutableStateOf(true) }
   var isError by remember { mutableStateOf(false) }
   val imageLoader = rememberAsyncImagePainter(
@@ -60,7 +61,7 @@ fun DynamicAsyncImage(
       contentScale = ContentScale.FillBounds,
       painter = if (isError.not() && !isLocalInspection) imageLoader else placeholder,
       contentDescription = contentDescription,
-      colorFilter = ColorFilter.tint(iconTint)
+      colorFilter = tint?.let { ColorFilter.tint(it) }
     )
   }
 }

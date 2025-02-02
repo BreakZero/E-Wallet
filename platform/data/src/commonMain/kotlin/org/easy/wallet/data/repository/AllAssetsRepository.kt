@@ -7,7 +7,7 @@ import org.easy.wallet.model.Assets
 import org.easy.wallet.model.Balance
 
 class AllAssetsRepository(
-  private val assetDataSource: AssetDataSource
+  private val assetDataSource: AssetDataSource,
 ) : AssetsRepository {
   override fun loadAllAssets(): Flow<List<Assets>> {
     return assetDataSource.loadAssets()

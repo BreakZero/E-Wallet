@@ -27,3 +27,15 @@ data class Balance(
   override val logoUrl: String? = null,
   val balance: String = "0.0"
 ): Assets
+
+fun Assets.toBalance(balance: String = "0.0"): Balance {
+  return Balance(
+    id = this.id,
+    coinName = this.coinName,
+    symbol = this.symbol,
+    decimals = this.decimals,
+    contractAddress = this.contractAddress,
+    logoUrl = this.logoUrl,
+    balance = balance
+  )
+}
